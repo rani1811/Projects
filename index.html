@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Player</title>
+
+    <!-- FontAwesome for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Music Player Section -->
+      <div class="player">
+        <h2 id="song-title">Song Title</h2>
+        <h3 id="song-artist">Artist Name</h3>
+        <h4 id="song-album">Album Name</h4>
+        <audio id="audio" src="song.mp3"></audio>
+
+        <!-- Progress Bar -->
+        <input type="range" id="progress" value="0" min="0" step="1" />
+
+        <!-- Controls -->
+        <div class="controls">
+          <button id="prev">⏮</button>
+          <button id="play-pause">▶</button>
+          <button id="next">⏭</button>
+        </div>
+
+        <!-- Volume Control -->
+        <label for="volume">Volume:</label>
+        <input type="range" id="volume" min="0" max="1" step="0.1" />
+
+        <!-- Buttons -->
+        <div class="buttons">
+          <button id="show-playlist">Playlist</button>
+          <button id="add-to-playlist" class="heart-btn">
+            <i class="fas fa-heart"></i>
+          </button>
+          <button id="insert-song" class="insert-btn">
+            <i class="fas fa-plus"></i>
+          </button>
+          <button id="favorites-btn">Favorites</button>
+        </div>
+      </div>
+
+      <!-- Playlist & Favorites Section -->
+      <div class="list">
+        <!-- Favorites -->
+        <div class="favorites-container" id="favorites-container">
+          <h3>Favorites</h3>
+          <ul id="favorites-items">
+            <li>No songs added</li>
+          </ul>
+        </div>
+
+        <!-- Playlist -->
+        <div class="playlist-container" id="playlist-container">
+          <h3>Playlist</h3>
+          <ul id="playlist-items">
+            <li>No songs added</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Hidden File Input -->
+      <input
+        type="file"
+        id="file-input"
+        accept="audio/*"
+        style="display: none"
+      />
+
+      <!-- JavaScript -->
+      <script src="script.js"></script>
+    </div>
+  </body>
+</html>
