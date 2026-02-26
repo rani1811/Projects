@@ -1,0 +1,34 @@
+services:
+  mysql-db:
+    image: mysql:8
+    container_name: mysql-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: music_player
+      MYSQL_USER: musicuser
+      MYSQL_PASSWORD: musicpass
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  music-app:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: music-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: mysql-db
+      DB_USER: musicuser
+      DB_PASS: musicpass
+      DB_NAME: music_player
+      PORT: 3000
+    depends_on:
+      - mysql-db
+
+volumes:
+  mysql_data:
