@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+
+  template:
+    metadata:
+      labels:
+        app: mysql
+
+    spec:                     # ✅ MISSING BLOCK (IMPORTANT)
+      containers:
+        - name: mysql-ctr
+          image: mysql:8
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "rootpassword"
+            - name: MYSQL_DATABASE
+              value: "music_player"
+            - name: MYSQL_USER
+              value: "musicuser"
+            - name: MYSQL_PASSWORD
+              value: "musicpass"
+
+          volumeMounts:
+             - name: mysqldata
+               mountPath: /var/lib/mysql
+      volumes:
+        - name: mysqldata
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+
