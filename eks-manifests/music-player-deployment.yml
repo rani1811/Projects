@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: music-player-deployment
+  labels:
+    app: music-player
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: music-player
+
+  template:
+    metadata:
+      labels:
+        app: music-player
+
+    spec:                     # ✅ MISSING BLOCK (IMPORTANT)
+      containers:
+        - name: music-player-ctr
+          image: raniingale2025/music_player:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DB_HOST
+              value: "mysql"
+            - name: DB_USER
+              value: "musicuser"
+            - name: DB_PASS
+              value: "musicpass"
+            - name: DB_NAME
+              value: "music_player"
